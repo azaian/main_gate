@@ -13,8 +13,12 @@
 #include "common_macros.h"
 
 
-
 void get_stored_password(uint8_t* pass);
 int initpassword();
+void open_gate();
+void alarm();
+void buzz();
+void MCU_power_down();
+void MCU_wake_up();
 
 #endif /* FUNCTION_H_ */

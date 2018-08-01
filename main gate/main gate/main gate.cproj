@@ -156,6 +156,12 @@
     <Compile Include="header\pins.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="header\timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="header\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

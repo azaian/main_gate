@@ -12,5 +12,7 @@ header\lcd.c
 
 header\pins.c
 
+header\timer.c
+
 main.c
 

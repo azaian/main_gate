@@ -11,29 +11,15 @@
 #include "common_macros.h"
 #include "micro_config.h"
 
-#define _outDoorLightDIR DDRB
-#define _outDoorLightPORT PORTB
-#define _outDoorLightpin PB0
+#define gateLockDIR DDRD
+#define gateLockPORT PORTD
+#define gateLockPIN PIND
+#define gateLockP PD6
 
-#define _poolDIR DDRB
-#define _poolPORT PORTB
-#define _poolpin PB3
-
-#define _alarmDIR DDRD
-#define _alarmPORT PORTD
-#define _alarmpin PD7
-
-#define _inDoorDIR DDRD
-#define _inDoorPORT PORTD
-#define _inDoorpin PD6
-
-#define _livingDIR DDRD
-#define _livingPORT PORTD
-#define _livingpin PD4
-
-
-#define open(port,pin) CLEAR_BIT(port,pin)
-#define close(port,pin) SET_BIT(port,pin)
+#define buzzerDIR DDRD
+#define buzzerPORT PORTD
+#define buzzerPIN PIND
+#define buzzerP PD7
 
 void init_pins();
 

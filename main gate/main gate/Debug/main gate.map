@@ -36,6 +36,8 @@ Discarded input sections
  .text          0x00000000        0x0 header/function.o
  .data          0x00000000        0x0 header/function.o
  .bss           0x00000000        0x0 header/function.o
+ .text.MCU_wake_up
+                0x00000000        0x8 header/function.o
  .text          0x00000000        0x0 header/keypad.o
  .data          0x00000000        0x0 header/keypad.o
  .bss           0x00000000        0x0 header/keypad.o
@@ -50,20 +52,15 @@ Discarded input sections
  .text          0x00000000        0x0 header/pins.o
  .data          0x00000000        0x0 header/pins.o
  .bss           0x00000000        0x0 header/pins.o
- .text.init_pins
-                0x00000000       0x16 header/pins.o
- .debug_info    0x00000000       0x82 header/pins.o
- .debug_abbrev  0x00000000       0x4f header/pins.o
- .debug_aranges
-                0x00000000       0x20 header/pins.o
- .debug_ranges  0x00000000       0x10 header/pins.o
- .debug_line    0x00000000       0xdc header/pins.o
- .debug_str     0x00000000      0x16f header/pins.o
- .comment       0x00000000       0x31 header/pins.o
- .debug_frame   0x00000000       0x24 header/pins.o
+ .text          0x00000000        0x0 header/timer.o
+ .data          0x00000000        0x0 header/timer.o
+ .bss           0x00000000        0x0 header/timer.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
+ .bss.counter   0x00000000        0x2 main.o
+ .bss.power_down_flag
+                0x00000000        0x1 main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
@@ -151,6 +148,7 @@ LOAD header/function.o
 LOAD header/keypad.o
 LOAD header/lcd.o
 LOAD header/pins.o
+LOAD header/timer.o
 LOAD main.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4\libm.a
@@ -259,7 +257,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x556
+.text           0x00000000      0x7e6
  *(.vectors)
  .vectors       0x00000000       0x26 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8/avr4/crtatmega8.o
                 0x00000000                __vector_default
@@ -333,7 +331,6 @@ END GROUP
                 0x0000007c                __vector_9
                 0x0000007c                __vector_2
                 0x0000007c                __vector_15
-                0x0000007c                __vector_8
                 0x0000007c                __vector_14
                 0x0000007c                __vector_10
                 0x0000007c                __vector_16
@@ -356,45 +353,76 @@ END GROUP
                 0x0000012a       0x2e header/function.o
                 0x0000012a                get_stored_password
  .text.initpassword
-                0x00000158       0xb0 header/function.o
+                0x00000158       0x34 header/function.o
                 0x00000158                initpassword
+ .text.open_gate
+                0x0000018c       0x18 header/function.o
+                0x0000018c                open_gate
+ .text.alarm    0x000001a4       0x18 header/function.o
+                0x000001a4                alarm
+ .text.buzz     0x000001bc       0x12 header/function.o
+                0x000001bc                buzz
+ .text.MCU_power_down
+                0x000001ce       0x1a header/function.o
+                0x000001ce                MCU_power_down
  .text.KeyPad_getPressedKey
-                0x00000208       0x5e header/keypad.o
-                0x00000208                KeyPad_getPressedKey
+                0x000001e8       0x5e header/keypad.o
+                0x000001e8                KeyPad_getPressedKey
  .text.LCD_sendCommand
-                0x00000266       0x7c header/lcd.o
-                0x00000266                LCD_sendCommand
+                0x00000246       0x7c header/lcd.o
+                0x00000246                LCD_sendCommand
  .text.LCD_init
-                0x000002e2       0x22 header/lcd.o
-                0x000002e2                LCD_init
+                0x000002c2       0x32 header/lcd.o
+                0x000002c2                LCD_init
  .text.LCD_displayCharacter
-                0x00000304       0x7c header/lcd.o
-                0x00000304                LCD_displayCharacter
+                0x000002f4       0x7c header/lcd.o
+                0x000002f4                LCD_displayCharacter
  .text.LCD_displayString
-                0x00000380       0x1c header/lcd.o
-                0x00000380                LCD_displayString
+                0x00000370       0x1c header/lcd.o
+                0x00000370                LCD_displayString
  .text.LCD_goToRowColumn
-                0x0000039c       0x1e header/lcd.o
-                0x0000039c                LCD_goToRowColumn
+                0x0000038c       0x1e header/lcd.o
+                0x0000038c                LCD_goToRowColumn
  .text.LCD_displayStringRowColumn
-                0x000003ba       0x12 header/lcd.o
-                0x000003ba                LCD_displayStringRowColumn
+                0x000003aa       0x12 header/lcd.o
+                0x000003aa                LCD_displayStringRowColumn
  .text.LCD_clearScreen
-                0x000003cc        0x6 header/lcd.o
-                0x000003cc                LCD_clearScreen
- .text.main     0x000003d2       0x2a main.o
-                0x000003d2                main
+                0x000003bc        0x6 header/lcd.o
+                0x000003bc                LCD_clearScreen
+ .text.LCD_power_off
+                0x000003c2       0x10 header/lcd.o
+                0x000003c2                LCD_power_off
+ .text.LCD_power_on
+                0x000003d2        0x4 header/lcd.o
+                0x000003d2                LCD_power_on
+ .text.init_pins
+                0x000003d6       0x10 header/pins.o
+                0x000003d6                init_pins
+ .text.init_TMR1
+                0x000003e6       0x40 header/timer.o
+                0x000003e6                init_TMR1
+ .text.TIMER1_sleep
+                0x00000426       0x1a header/timer.o
+                0x00000426                TIMER1_sleep
+ .text.TIMER1_start
+                0x00000440       0x1a header/timer.o
+                0x00000440                TIMER1_start
+ .text.main     0x0000045a       0x3c main.o
+                0x0000045a                main
  .text.__vector_1
-                0x000003fc      0x144 main.o
-                0x000003fc                __vector_1
+                0x00000496      0x2ca main.o
+                0x00000496                __vector_1
+ .text.__vector_8
+                0x00000760       0x70 main.o
+                0x00000760                __vector_8
  .text.avr-libc
-                0x00000540       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4\libc.a(strcmp.o)
-                0x00000540                strcmp
-                0x00000552                . = ALIGN (0x2)
+                0x000007d0       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr4\libc.a(strcmp.o)
+                0x000007d0                strcmp
+                0x000007e2                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000552        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
-                0x00000552                _exit
-                0x00000552                exit
+ .fini9         0x000007e2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+                0x000007e2                _exit
+                0x000007e2                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -413,11 +441,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000552        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+ .fini0         0x000007e2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000556                _etext = .
+                0x000007e6                _etext = .
 
-.data           0x00800060       0x6c load address 0x00000556
+.data           0x00800060       0xfc load address 0x000007e6
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -425,35 +453,38 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800060       0x24 header/function.o
+                0x00800060       0x1d header/function.o
  .rodata.str1.1
-                0x00800084       0x47 main.o
+                0x0080007d       0xde main.o
  *(.gnu.linkonce.r*)
-                0x008000cc                . = ALIGN (0x2)
- *fill*         0x008000cb        0x1 
-                0x008000cc                _edata = .
-                0x008000cc                PROVIDE (__data_end, .)
+                0x0080015c                . = ALIGN (0x2)
+ *fill*         0x0080015b        0x1 
+                0x0080015c                _edata = .
+                0x0080015c                PROVIDE (__data_end, .)
 
-.bss            0x008000cc       0x3e
-                0x008000cc                PROVIDE (__bss_start, .)
+.bss            0x0080015c       0x40
+                0x0080015c                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.passitr   0x008000cc        0x2 main.o
-                0x008000cc                passitr
+ .bss.pass_flag
+                0x0080015c        0x2 main.o
+                0x0080015c                pass_flag
+ .bss.passitr   0x0080015e        0x2 main.o
+                0x0080015e                passitr
  *(COMMON)
- COMMON         0x008000ce       0x3c main.o
-                0x008000ce                password
-                0x008000e2                storedpass
-                0x008000f6                un
-                0x0080010a                PROVIDE (__bss_end, .)
-                0x00000556                __data_load_start = LOADADDR (.data)
-                0x000005c2                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800160       0x3c main.o
+                0x00800160                password
+                0x00800174                storedpass
+                0x00800188                un
+                0x0080019c                PROVIDE (__bss_end, .)
+                0x000007e6                __data_load_start = LOADADDR (.data)
+                0x000008e2                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080010a        0x0
+.noinit         0x0080019c        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080010a                _end = .
+                0x0080019c                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -500,6 +531,8 @@ END GROUP
  .comment       0x00000030       0x31 header/function.o
  .comment       0x00000030       0x31 header/keypad.o
  .comment       0x00000030       0x31 header/lcd.o
+ .comment       0x00000030       0x31 header/pins.o
+ .comment       0x00000030       0x31 header/timer.o
  .comment       0x00000030       0x31 main.o
 
 .note.gnu.avr.deviceinfo
@@ -522,78 +555,94 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x118
+.debug_aranges  0x00000000      0x1a8
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x48 header/EEPROM.o
  .debug_aranges
-                0x00000048       0x28 header/function.o
+                0x00000048       0x50 header/function.o
  .debug_aranges
-                0x00000070       0x28 header/keypad.o
+                0x00000098       0x28 header/keypad.o
  .debug_aranges
-                0x00000098       0x58 header/lcd.o
+                0x000000c0       0x68 header/lcd.o
  .debug_aranges
-                0x000000f0       0x28 main.o
+                0x00000128       0x20 header/pins.o
+ .debug_aranges
+                0x00000148       0x30 header/timer.o
+ .debug_aranges
+                0x00000178       0x30 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1544
+.debug_info     0x00000000     0x1bfc
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x48c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8/avr4/crtatmega8.o
  .debug_info    0x0000048c      0x246 header/EEPROM.o
- .debug_info    0x000006d2      0x2e8 header/function.o
- .debug_info    0x000009ba       0xd3 header/keypad.o
- .debug_info    0x00000a8d      0x717 header/lcd.o
- .debug_info    0x000011a4      0x3a0 main.o
+ .debug_info    0x000006d2      0x336 header/function.o
+ .debug_info    0x00000a08       0xd3 header/keypad.o
+ .debug_info    0x00000adb      0x79c header/lcd.o
+ .debug_info    0x00001277       0x82 header/pins.o
+ .debug_info    0x000012f9       0xb7 header/timer.o
+ .debug_info    0x000013b0      0x84c main.o
 
-.debug_abbrev   0x00000000      0xabc
+.debug_abbrev   0x00000000      0xb90
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x44e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8/avr4/crtatmega8.o
  .debug_abbrev  0x0000044e      0x10b header/EEPROM.o
- .debug_abbrev  0x00000559      0x15c header/function.o
- .debug_abbrev  0x000006b5       0xa1 header/keypad.o
- .debug_abbrev  0x00000756      0x1eb header/lcd.o
- .debug_abbrev  0x00000941      0x17b main.o
+ .debug_abbrev  0x00000559      0x17a header/function.o
+ .debug_abbrev  0x000006d3       0xa1 header/keypad.o
+ .debug_abbrev  0x00000774      0x203 header/lcd.o
+ .debug_abbrev  0x00000977       0x4f header/pins.o
+ .debug_abbrev  0x000009c6       0x4f header/timer.o
+ .debug_abbrev  0x00000a15      0x17b main.o
 
-.debug_line     0x00000000      0xb17
+.debug_line     0x00000000      0xfe3
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x109 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8/avr4/crtatmega8.o
  .debug_line    0x00000109      0x1ce header/EEPROM.o
- .debug_line    0x000002d7      0x1b9 header/function.o
- .debug_line    0x00000490      0x12c header/keypad.o
- .debug_line    0x000005bc      0x331 header/lcd.o
- .debug_line    0x000008ed      0x22a main.o
+ .debug_line    0x000002d7      0x233 header/function.o
+ .debug_line    0x0000050a      0x12c header/keypad.o
+ .debug_line    0x00000636      0x389 header/lcd.o
+ .debug_line    0x000009bf       0xca header/pins.o
+ .debug_line    0x00000a89      0x12d header/timer.o
+ .debug_line    0x00000bb6      0x42d main.o
 
-.debug_frame    0x00000000      0x2b4
+.debug_frame    0x00000000      0x3d4
  *(.debug_frame)
  .debug_frame   0x00000000       0xdc header/EEPROM.o
- .debug_frame   0x000000dc       0x64 header/function.o
- .debug_frame   0x00000140       0x34 header/keypad.o
- .debug_frame   0x00000174       0xbc header/lcd.o
- .debug_frame   0x00000230       0x84 main.o
+ .debug_frame   0x000000dc       0x98 header/function.o
+ .debug_frame   0x00000174       0x34 header/keypad.o
+ .debug_frame   0x000001a8       0xdc header/lcd.o
+ .debug_frame   0x00000284       0x24 header/pins.o
+ .debug_frame   0x000002a8       0x44 header/timer.o
+ .debug_frame   0x000002ec       0xe8 main.o
 
-.debug_str      0x00000000      0x530
+.debug_str      0x00000000      0x5f9
  *(.debug_str)
  .debug_str     0x00000000      0x17a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8/avr4/crtatmega8.o
  .debug_str     0x0000017a      0x1c8 header/EEPROM.o
                                 0x1fc (size before relaxing)
- .debug_str     0x00000342       0xdc header/function.o
-                                0x276 (size before relaxing)
- .debug_str     0x0000041e       0x44 header/keypad.o
+ .debug_str     0x00000342       0xee header/function.o
+                                0x269 (size before relaxing)
+ .debug_str     0x00000430       0x59 header/keypad.o
                                 0x1ad (size before relaxing)
- .debug_str     0x00000462       0x98 header/lcd.o
-                                0x28f (size before relaxing)
- .debug_str     0x000004fa       0x36 main.o
-                                0x27a (size before relaxing)
+ .debug_str     0x00000489       0xbc header/lcd.o
+                                0x2aa (size before relaxing)
+ .debug_str     0x00000545       0x1b header/pins.o
+                                0x16f (size before relaxing)
+ .debug_str     0x00000560       0x36 header/timer.o
+                                0x193 (size before relaxing)
+ .debug_str     0x00000596       0x63 main.o
+                                0x33c (size before relaxing)
 
-.debug_loc      0x00000000      0xd45
+.debug_loc      0x00000000      0xf99
  *(.debug_loc)
  .debug_loc     0x00000000      0x3b1 header/EEPROM.o
- .debug_loc     0x000003b1      0x1b4 header/function.o
- .debug_loc     0x00000565       0x1e header/keypad.o
- .debug_loc     0x00000583      0x695 header/lcd.o
- .debug_loc     0x00000c18      0x12d main.o
+ .debug_loc     0x000003b1      0x1bd header/function.o
+ .debug_loc     0x0000056e       0x1e header/keypad.o
+ .debug_loc     0x0000058c      0x6db header/lcd.o
+ .debug_loc     0x00000c67      0x332 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -613,13 +662,15 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0xc8
+.debug_ranges   0x00000000      0x138
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x38 header/EEPROM.o
- .debug_ranges  0x00000038       0x18 header/function.o
- .debug_ranges  0x00000050       0x18 header/keypad.o
- .debug_ranges  0x00000068       0x48 header/lcd.o
- .debug_ranges  0x000000b0       0x18 main.o
+ .debug_ranges  0x00000038       0x40 header/function.o
+ .debug_ranges  0x00000078       0x18 header/keypad.o
+ .debug_ranges  0x00000090       0x58 header/lcd.o
+ .debug_ranges  0x000000e8       0x10 header/pins.o
+ .debug_ranges  0x000000f8       0x20 header/timer.o
+ .debug_ranges  0x00000118       0x20 main.o
 
 .debug_macro
  *(.debug_macro)

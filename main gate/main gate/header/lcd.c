@@ -10,6 +10,11 @@
 
 void LCD_init(void)
 {
+	// power lcd
+	SET_BIT(LCD_POWER_DIR,LCD_POWER_P);
+	SET_BIT(LCD_POWER_PORT,LCD_POWER_P);
+	_delay_ms(50);
+	
 	LCD_CTRL_PORT_DIR |= (1<<E) | (1<<RS) ; //| (1<<RW); /* Configure the control pins(E,RS,RW) as output pins */
 	
 	#if (DATA_BITS_MODE == 4)
@@ -40,7 +45,7 @@ void LCD_sendCommand(uint8_t command)
 	#if (DATA_BITS_MODE == 4)
 	/* out the highest 4 bits of the required command to the data bus D4 --> D7 */
 	#ifdef UPPER_PORT_PINS							/* if the higher pins in lcd is used */
-	//rest the 
+	//rest the
 	LCD_DATA_PORT &=(!0xF0);
 	LCD_DATA_PORT |= ((command & 0xF0));
 	#else
@@ -192,4 +197,19 @@ void LCD_intgerToString(int data)
 void LCD_clearScreen(void)
 {
 	LCD_sendCommand(CLEAR_COMMAND); //clear display
+}
+
+void LCD_power_off()
+{
+	LCD_sendCommand(DISPLAY_OFF);
+	PORTC &=!(0x0f);
+	PORTD &=!(0x03);
+	CLEAR_BIT(LCD_POWER_PORT,LCD_POWER_P);
+	
+	
+}
+
+void LCD_power_on()
+{
+	LCD_init();
 }

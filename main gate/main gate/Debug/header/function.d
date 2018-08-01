@@ -19,7 +19,7 @@ header/function.d header/function.o: ../header/function.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  ../header/common_macros.h ../header/lcd.h ../header/EEPROM.h \
- ../header/keypad.h
+ ../header/pins.h
 
 ../header/function.h:
 
@@ -67,4 +67,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../header/EEPROM.h:
 
-../header/keypad.h:
+../header/pins.h:

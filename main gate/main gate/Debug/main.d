@@ -18,7 +18,8 @@ main.d main.o: .././main.c .././header/micro_config.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  .././header/lcd.h .././header/common_macros.h .././header/micro_config.h \
- .././header/keypad.h .././header/EEPROM.h .././header/function.h
+ .././header/keypad.h .././header/EEPROM.h .././header/function.h \
+ .././header/pins.h .././header/timer.h
 
 .././header/micro_config.h:
 
@@ -69,3 +70,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././header/EEPROM.h:
 
 .././header/function.h:
+
+.././header/pins.h:
+
+.././header/timer.h:

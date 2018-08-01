@@ -8,21 +8,19 @@
 
 
 void init_pins(){
-	//set as out 
-	SET_BIT(_outDoorLightDIR,_outDoorLightpin);
-	SET_BIT(_outDoorLightPORT,_outDoorLightpin);
+
+	SET_BIT(gateLockDIR,gateLockP);//set gate lock pin to output
+	CLEAR_BIT(gateLockPORT,gateLockP); // enable pull up resistor on gate lock pin
 	
-	SET_BIT(_poolDIR,_poolpin);
-	SET_BIT(_poolPORT,_poolpin);
+	SET_BIT(buzzerDIR,buzzerP);
+	CLEAR_BIT(buzzerPORT,buzzerP);
 	
-	SET_BIT(_alarmDIR,_alarmpin);
-	SET_BIT(_alarmPORT,_alarmpin);
 	
-	SET_BIT(_inDoorDIR,_inDoorpin);
-	SET_BIT(_inDoorPORT,_inDoorpin);
 	
-	SET_BIT(_livingDIR,_livingpin);
-	SET_BIT(_livingPORT,_livingpin);
 	
+	CLEAR_BIT(DDRD,PD2); // set PD2 INT0 as input
+	
+	CLEAR_BIT(DDRD,PD5);	// pin of reset password as input 
+	SET_BIT(PORTD,PD5);		// 
 	
 }

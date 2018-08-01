@@ -4,10 +4,11 @@
 * Created: 7/21/2018 8:36:52 PM
 *  Author: zaian
 */
+
 #include "function.h"
 #include "lcd.h"
 #include "EEPROM.h"
-#include "keypad.h"
+#include "pins.h"
 void get_stored_password(uint8_t* pass){
 	
 	char len = EEPROM_read(passLenAddr);
@@ -16,27 +17,50 @@ void get_stored_password(uint8_t* pass){
 
 }
 
-
-void initpassword()
+int initpassword()
 {
-	char str[20];
-	int i=0;
-	char ch;
-	CLEAR_BIT(DDRD,PD5);
-	SET_BIT(PORTD,PD5); // enable pull up resistor on pd5 pin
-	_delay_ms(3000);
-	if (BIT_IS_CLEAR(PIND,PD5))// set new password
-	{
-		LCD_clearScreen();
-		LCD_displayString("enter new password");
-		return 1;
-	}
-	else
-	{
-		LCD_clearScreen();
-		LCD_displayString("use your password");
-		return 0;
-	}
+	_delay_ms(2000); // wait for check new password update
 
+	if (BIT_IS_SET(PIND,PD5))	return 0; // if pin is set change nothing if not return 1 to change password
+	
+	LCD_clearScreen();
+	LCD_displayString("press any key");
+	LCD_displayStringRowColumn(1,0,"to change pass");
+	return 1;
+}
 
+void open_gate()
+{
+	SET_BIT(gateLockPORT,gateLockP);
+	_delay_ms(2000);
+	CLEAR_BIT(gateLockPORT,gateLockP);
+
+	
+}
+
+void alarm()
+{
+	SET_BIT(buzzerPORT,buzzerP);
+	_delay_ms(1500);
+	CLEAR_BIT(buzzerPORT,buzzerP);	
+}
+
+void buzz()
+{
+	SET_BIT(buzzerPORT,buzzerP);
+	_delay_ms(100);
+	CLEAR_BIT(buzzerPORT,buzzerP);
+}
+
+void MCU_power_down(){
+	SET_BIT(MCUCR,SE);
+	//SM0..2 010 for power_down mode
+	CLEAR_BIT(MCUCR,SM0);
+	SET_BIT(MCUCR,SM1);
+	CLEAR_BIT(MCUCR,SM2);
+}
+
+void MCU_wake_up()
+{
+	CLEAR_BIT(MCUCR,SE);
 }

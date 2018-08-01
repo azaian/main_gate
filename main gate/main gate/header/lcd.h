@@ -19,13 +19,18 @@
 #if (DATA_BITS_MODE == 4)
 
 #endif
+#define  LCD_POWER_DIR DDRB
+#define LCD_POWER_PORT PORTB
+#define LCD_POWER_PIN PINB
+#define LCD_POWER_P PB1
+
 
 /* LCD HW Pins */
-#define RS PB0
+#define RS PD0
 //#define RW PA6
-#define E  PB1
-#define LCD_CTRL_PORT PORTB
-#define LCD_CTRL_PORT_DIR DDRB
+#define E  PD1
+#define LCD_CTRL_PORT PORTD
+#define LCD_CTRL_PORT_DIR DDRD
 #define LCD_DATA_PORT PORTC
 #define LCD_DATA_PORT_DIR DDRC
 
@@ -55,5 +60,6 @@ void LCD_clearScreen(void);
 void LCD_displayStringRowColumn(uint8_t row,uint8_t col,const char *Str);
 void LCD_goToRowColumn(uint8_t row,uint8_t col);
 void LCD_intgerToString(int data);
-
+void LCD_power_off();
+void LCD_power_on();
 #endif /* LCD_H_ */

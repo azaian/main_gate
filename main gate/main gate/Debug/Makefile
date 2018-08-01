@@ -43,6 +43,7 @@ C_SRCS +=  \
 ../header/keypad.c \
 ../header/lcd.c \
 ../header/pins.c \
+../header/timer.c \
 ../main.c
 
 
@@ -58,6 +59,7 @@ header/function.o \
 header/keypad.o \
 header/lcd.o \
 header/pins.o \
+header/timer.o \
 main.o
 
 OBJS_AS_ARGS +=  \
@@ -66,6 +68,7 @@ header/function.o \
 header/keypad.o \
 header/lcd.o \
 header/pins.o \
+header/timer.o \
 main.o
 
 C_DEPS +=  \
@@ -74,6 +77,7 @@ header/function.d \
 header/keypad.d \
 header/lcd.d \
 header/pins.d \
+header/timer.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
@@ -82,6 +86,7 @@ header/function.d \
 header/keypad.d \
 header/lcd.d \
 header/pins.d \
+header/timer.d \
 main.d
 
 OUTPUT_FILE_PATH +=main\ gate.elf
@@ -127,6 +132,13 @@ header/lcd.o: ../header/lcd.c
 	
 
 header/pins.o: ../header/pins.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega8 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega8" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+header/timer.o: ../header/timer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega8 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega8" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
